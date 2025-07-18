@@ -104,7 +104,7 @@
                                 </Border.Style>
                                 <Border.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Open Folder" Command="{Binding DataContext.OpenFolderCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                        <MenuItem Header="Open Folder" Command="{Binding PlacementTarget.DataContext.OpenFolderCommand, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" CommandParameter="{Binding}"/>
                                         <MenuItem Header="View Passes">
                                             <MenuItem Header="Base Color" Click="ViewPass_Click" Tag="BaseColor"/>
                                             <MenuItem Header="Normal" Click="ViewPass_Click" Tag="Normal"/>

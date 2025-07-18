@@ -59,8 +59,21 @@ namespace TextureLibrarian
         {
             if (sender is MenuItem menuItem && menuItem.DataContext is TextureItem texture)
             {
-                var passType = TexturePassType.BaseColor;
-                if (menuItem.Tag.ToString() != "Composite")
+                TexturePassType passType = TexturePassType.BaseColor;
+
+                if (menuItem.Tag.ToString() == "Composite")
+                {
+                    // For composite, prefer metallic for metals, base color for others
+                    if (texture.Category?.Name == "Metal")
+                    {
+                        var metallicPass = texture.Passes.FirstOrDefault(p => p.Type == TexturePassType.Metallic);
+                        if (metallicPass != null)
+                        {
+                            passType = TexturePassType.Metallic;
+                        }
+                    }
+                }
+                else
                 {
                     passType = Enum.Parse<TexturePassType>(menuItem.Tag.ToString());
                 }

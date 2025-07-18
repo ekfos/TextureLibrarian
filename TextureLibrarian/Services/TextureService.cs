@@ -131,9 +131,27 @@ namespace TextureLibrarian.Services
         {
             try
             {
-                // Try to find base color pass first
-                var baseColorPass = texture.Passes.FirstOrDefault(p => p.Type == TexturePassType.BaseColor);
-                var thumbnailPath = baseColorPass?.FilePath ?? texture.Passes.FirstOrDefault()?.FilePath;
+                string thumbnailPath = null;
+
+                // For metal textures, try to find a metallic pass first, then base color
+                if (texture.Category?.Name == "Metal")
+                {
+                    var metallicPass = texture.Passes.FirstOrDefault(p => p.Type == TexturePassType.Metallic);
+                    thumbnailPath = metallicPass?.FilePath;
+                }
+
+                // If no metallic pass or not metal, try base color
+                if (thumbnailPath == null)
+                {
+                    var baseColorPass = texture.Passes.FirstOrDefault(p => p.Type == TexturePassType.BaseColor);
+                    thumbnailPath = baseColorPass?.FilePath;
+                }
+
+                // Fall back to first available pass
+                if (thumbnailPath == null)
+                {
+                    thumbnailPath = texture.Passes.FirstOrDefault()?.FilePath;
+                }
 
                 if (thumbnailPath != null && File.Exists(thumbnailPath))
                 {
@@ -150,7 +168,6 @@ namespace TextureLibrarian.Services
             }
             catch (Exception ex)
             {
-                // Log error if needed
                 System.Diagnostics.Debug.WriteLine($"Error generating thumbnail: {ex.Message}");
             }
         }

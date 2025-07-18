@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Automation;
 
 namespace TextureLibrarian.Models
 {
@@ -35,7 +36,8 @@ namespace TextureLibrarian.Models
                 new MaterialCategory { Name = "Asphalt", DisplayName = "Asphalt", Keywords = new List<string> { "asphalt", "tarmac", "road" } },
                 new MaterialCategory { Name = "Water", DisplayName = "Water", Keywords = new List<string> { "water", "liquid", "sea", "ocean" } },
                 new MaterialCategory { Name = "Snow", DisplayName = "Snow / Ice", Keywords = new List<string> { "snow", "ice", "frozen" } },
-                new MaterialCategory { Name = "Organic", DisplayName = "Organic / Bark / Leaves", Keywords = new List<string> { "bark", "leaves", "organic", "wood", "tree" } },
+                new MaterialCategory { Name = "Organic", DisplayName = "Organic / Bark / Leaves", Keywords = new List<string> { "bark", "leaves", "organic" } },
+                new MaterialCategory { Name = "Wood", DisplayName = "Wood", Keywords = new List<string> { "wood", "wooden", "timber", "lumber", "plank", "board", "tree" } },
                 new MaterialCategory { Name = "Uncategorized", DisplayName = "Uncategorized", Keywords = new List<string>() }
             };
         }
